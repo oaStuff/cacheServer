@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 	"github.com/oaStuff/logservice"
-	"github.com/oaStuff/cacheserver/server"
+	"github.com/oaStuff/cacheServer/server"
 	"github.com/spf13/viper"
 	"fmt"
 )
