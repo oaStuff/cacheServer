@@ -1,9 +1,10 @@
 {
     "name" : "server_id_1",
     "join" : "",
-    "port" : 0,
-    "log" : true,
-    "logfile" : "",
-    "http" : false,
-    "httpport" : 0
+    "port" : 9910,
+    "log" : false,
+    "logfile" : "./logs/app.log",
+    "web" : true,
+    "webport" : 8080,
+    "webdebug" : true
 }

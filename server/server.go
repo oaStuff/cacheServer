@@ -7,14 +7,15 @@ import (
 
 //server configuration
 type Config struct {
-	Name 			string
-	Join 			string
-	LocalPort 		int
-	ConfigFile 		string
-	EnableLog 		bool
-	LogFile 		string
-	EnableHttp 		bool
-	HttpPort 		int
+	Name       string
+	Join       string
+	LocalPort  int
+	ConfigFile string
+	EnableLog  bool
+	LogFile    string
+	EnableWeb  bool
+	WebPort    int
+	WebDebug   bool
 }
 
 //server description
