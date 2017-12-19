@@ -7,9 +7,10 @@ import (
 	"os/signal"
 	"syscall"
 	"github.com/oaStuff/logservice"
-	"github.com/oaStuff/cacheserver/server"
+	"github.com/oaStuff/cacheServer/server"
 	"github.com/spf13/viper"
 	"fmt"
+	"github.com/spf13/pflag"
 )
 
 
@@ -21,8 +22,8 @@ func main() {
 										AllowConsoleLog:true, Filename:svrConfig.LogFile})
 
 	logger.Info("cacheServer starting ...")
-	svr := server.New(svrConfig, logger)
-	svr.Start()
+	//svr := server.New(svrConfig, logger)
+	//svr.Start()
 	logger.Info("cacheServer started")
 
 
@@ -44,12 +45,28 @@ func parseProgramArgument() *server.Config {
 	enableHttp := flag.Bool("http", false, "enable the http endpoint")
 	httpPort := flag.Int("httpport", -1, "http endpoint port")
 
-	flag.Parse()
-
+	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
+	pflag.Parse()
+	viper.BindPFlags(pflag.CommandLine)
 	svr := &server.Config{}
+	svr.ConfigFile = *configFile
+
+	svr.ConfigFile = strings.Trim(svr.ConfigFile,"'")
+	svr.ConfigFile = strings.Trim(svr.ConfigFile,"\"")
+
+	if svr.ConfigFile != "" {
+		//viper.AddConfigPath("./data/")
+		//viper.SetConfigName("sampleConfig")
+		viper.SetConfigFile(svr.ConfigFile)
+		if err := viper.ReadInConfig(); err != nil {
+			panic(err)
+		}
+	}
+
+	fmt.Println(viper.Get("name"))
+
 	svr.LocalPort = *localPort
 	svr.Join = *join
-	svr.ConfigFile = *configFile
 	svr.EnableHttp = *enableHttp
 	svr.EnableLog = *enableLog
 	svr.LogFile = *logFile
@@ -75,20 +92,6 @@ func parseProgramArgument() *server.Config {
 			panic("specify a port higher than 1024")
 		}
 
-	}
-
-	svr.ConfigFile = strings.Trim(svr.ConfigFile,"'")
-	svr.ConfigFile = strings.Trim(svr.ConfigFile,"\"")
-
-	if svr.ConfigFile != "" {
-		//viper.AddConfigPath("./data/")
-		//viper.SetConfigName("sampleConfig")
-		viper.SetConfigFile(svr.ConfigFile)
-		if err := viper.ReadInConfig(); err != nil {
-			fmt.Println(err.Error())
-		}
-
-		fmt.Println(viper.Get("name"))
 	}
 
 	return svr

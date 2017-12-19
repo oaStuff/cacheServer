@@ -1,10 +1,9 @@
 {
     "name" : "server_id_1",
     "join" : "",
-    "localport" : 0,
-    "configfile" : "",
-    "enablelog" : false,
+    "port" : 0,
+    "log" : true,
     "logfile" : "",
-    "enablehttp" : false,
+    "http" : false,
     "httpport" : 0
 }
