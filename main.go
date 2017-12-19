@@ -97,7 +97,7 @@ func parseProgramArgument() *server.Config {
 
 	if svr.EnableWeb {
 		if svr.WebPort < 1024 {
-			fmt.Fprintln(os.Stderr, "specify an web port higher than 1024")
+			fmt.Fprintln(os.Stderr, "specify a web port higher than 1024")
 			os.Exit(1)
 		}
 
