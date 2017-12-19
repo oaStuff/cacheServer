@@ -8,7 +8,7 @@ import (
 	"github.com/oaStuff/cacheServer/server"
 )
 
-func StartHttpServer(svr server.Server) {
+func StartHttpServer(svr *server.Server) {
 
 
 	if !svr.Config.WebDebug {
