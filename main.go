@@ -48,7 +48,7 @@ func parseProgramArgument() *server.Config {
 	flag.Bool("log", false, "enable server logging")
 	flag.String("logfile", "", "server log file")
 	flag.Bool("web", false, "enable the web endpoint")
-	flag.Int("webpport", -1, "web endpoint port")
+	flag.Int("webport", -1, "web endpoint port")
 	flag.Bool("webdebug", false, "debug web request")
 
 	pflag.CommandLine.AddGoFlagSet(flag.CommandLine)
@@ -86,16 +86,19 @@ func parseProgramArgument() *server.Config {
 	svr.Name = strings.Trim(svr.Name,"\"")
 
 	if svr.LocalPort < 1024 {
-		panic(fmt.Sprintf("local port must be greater than 1024. current value is %d", svr.LocalPort))
+		fmt.Fprintf(os.Stderr,"local port must be greater than 1024. current value is %d\n", svr.LocalPort)
+		os.Exit(1)
 	}
 
 	if svr.EnableLog && svr.LogFile == "" {
-		panic("log file must be specified since logging is enabled")
+		fmt.Fprintln(os.Stderr,"log file must be specified since logging is enabled")
+		os.Exit(1)
 	}
 
 	if svr.EnableWeb {
 		if svr.WebPort < 1024 {
-			panic("specify an web port higher than 1024")
+			fmt.Fprintln(os.Stderr, "specify an web port higher than 1024")
+			os.Exit(1)
 		}
 
 	}
