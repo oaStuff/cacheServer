@@ -72,6 +72,7 @@ func parseProgramArgument() *server.Config {
 	svr.Name = viper.GetString("name")
 	svr.LocalPort = viper.GetInt("port")
 	svr.Join = viper.GetString("join")
+	svr.ReconnectOnDisconnect = viper.GetBool("reconnect_on_disconnect")
 	svr.EnableLog = viper.GetBool("log")
 	svr.LogFile = viper.GetString("logfile")
 	svr.EnableWeb = viper.GetBool("web")

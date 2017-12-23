@@ -7,15 +7,16 @@ import (
 
 //server configuration
 type Config struct {
-	Name       string
-	Join       string
-	LocalPort  int
-	ConfigFile string
-	EnableLog  bool
-	LogFile    string
-	EnableWeb  bool
-	WebPort    int
-	WebDebug   bool
+	Name                  string
+	Join                  string
+	ReconnectOnDisconnect bool
+	LocalPort             int
+	ConfigFile            string
+	EnableLog             bool
+	LogFile               string
+	EnableWeb             bool
+	WebPort               int
+	WebDebug              bool
 }
 
 //server description
@@ -32,6 +33,7 @@ func New(config *Config, logger *asyncLogger.Logger) *Server {
 	cacheConfig := clusteredBigCache.DefaultClusterConfig()
 	cacheConfig.LocalPort = config.LocalPort
 	cacheConfig.Id = config.Name
+	cacheConfig.ReconnectOnDisconnect = config.ReconnectOnDisconnect
 	if config.Join != "" {
 		cacheConfig.Join = true
 		cacheConfig.JoinIp = config.Join
