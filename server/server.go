@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/oaStuff/clusteredBigCache/Cluster"
 	"github.com/oaStuff/logservice"
+	"time"
 )
 
 //server configuration
@@ -50,4 +51,16 @@ func New(config *Config, logger *asyncLogger.Logger) *Server {
 //start the server
 func (svr *Server) Start()  {
 	svr.cache.Start()
+}
+
+func (svr *Server) Put(key string, data []byte, duration time.Duration) {
+	svr.cache.Put(key, data, duration)
+}
+
+func (svr *Server) Get(key string, duration time.Duration) ([]byte, error) {
+	return svr.cache.Get(key, duration)
+}
+
+func (svr *Server) Delete(key string) error {
+	return svr.cache.Delete(key)
 }
