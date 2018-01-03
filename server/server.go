@@ -35,6 +35,10 @@ func New(config *Config, logger *asyncLogger.Logger) *Server {
 	cacheConfig.LocalPort = config.LocalPort
 	cacheConfig.Id = config.Name
 	cacheConfig.ReconnectOnDisconnect = config.ReconnectOnDisconnect
+	//cacheConfig.PingFailureThreshHold = 100
+	//cacheConfig.PingInterval = 50
+	//cacheConfig.PingTimeout = 40
+
 	if config.Join != "" {
 		cacheConfig.Join = true
 		cacheConfig.JoinIp = config.Join

@@ -8,6 +8,7 @@ import (
 	"github.com/oaStuff/cacheServer/server"
 	"net/http"
 	"time"
+	"net/http/pprof"
 )
 
 func StartHttpServer(svr *server.Server) {
@@ -62,6 +63,14 @@ func StartHttpServer(svr *server.Server) {
 
 		c.JSON(http.StatusOK, map[string]string{"code":"c_200", "msg":"successful"})
 	})
+
+	g.Any("/debug/pprof/", gin.WrapF(pprof.Index))
+	g.Any("/debug/pprof/cmdline", gin.WrapF(pprof.Cmdline))
+	g.Any("/debug/pprof/profile", gin.WrapF(pprof.Profile))
+	g.Any("/debug/pprof/symbol", gin.WrapF(pprof.Symbol))
+	g.Any("/debug/pprof/trace", gin.WrapF(pprof.Trace))
+
+
 
 	g.Run(net.JoinHostPort("",strconv.Itoa(svr.Config.WebPort)))
 }

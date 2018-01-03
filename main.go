@@ -12,6 +12,7 @@ import (
 	"github.com/spf13/pflag"
 	"fmt"
 	"github.com/oaStuff/cacheServer/web"
+	_"net/http/pprof"
 )
 
 
@@ -26,6 +27,7 @@ func main() {
 	svr := server.New(svrConfig, logger)
 	svr.Start()
 	logger.Info("cacheServer started")
+
 	if svrConfig.EnableWeb {
 		go web.StartHttpServer(svr)
 	}
