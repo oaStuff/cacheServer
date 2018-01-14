@@ -8,9 +8,10 @@ It takes configuration from command line or a config file. Every config from the
 
 ## Installing
 
-### Using *go get*
+### Using *go get* and *dep ensure* to pull dependencies
 
     $ go get github.com/oaStuff/cacheServer
+    $ dep ensure
 
 ## Running it
 
