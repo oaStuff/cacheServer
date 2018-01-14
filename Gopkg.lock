@@ -70,14 +70,20 @@
 [[projects]]
   name = "github.com/oaStuff/clusteredBigCache"
   packages = ["Cluster","bigcache","bigcache/queue","comms","message","utils"]
-  revision = "15b315872a954e77d0c7c3e253907e6531e6cc4a"
-  version = "v0.1"
+  revision = "a6063ba751d94633504013da25370725af1bf754"
+  version = "v0.3.1"
 
 [[projects]]
   branch = "master"
   name = "github.com/oaStuff/logservice"
   packages = ["."]
   revision = "3c69f8cee3149eea22130215119c65f0441940e8"
+
+[[projects]]
+  name = "github.com/oklog/run"
+  packages = ["."]
+  revision = "4dadeb3030eda0273a12382bb2348ffc7c9d1a39"
+  version = "v1.0.0"
 
 [[projects]]
   name = "github.com/op/go-logging"
@@ -160,6 +166,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c101557e507890a4202720ceb116054b512a266e3f3a60a9f29510ad2faf8a0e"
+  inputs-digest = "5efc14fd98da5c0b77e6ec94b8cc4065c05deb369b859648b3560b745e6ff569"
   solver-name = "gps-cdcl"
   solver-version = 1
