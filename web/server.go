@@ -5,10 +5,12 @@ import (
 	"strconv"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/contrib/static"
+	"github.com/gin-contrib/cors"
 	"github.com/oaStuff/cacheServer/server"
 	"net/http"
 	"time"
 	"net/http/pprof"
+	"fmt"
 )
 
 func StartHttpServer(svr *server.Server) {
@@ -19,6 +21,7 @@ func StartHttpServer(svr *server.Server) {
 	}
 
 	g := gin.Default()
+	g.Use(cors.Default())
 	g.Use(static.Serve("/", static.LocalFile("./web", true)))
 	g.NoRoute(func(c *gin.Context) {
 		c.File("./web/index.html")
@@ -27,6 +30,7 @@ func StartHttpServer(svr *server.Server) {
 	g.POST("/data/:key", func(c *gin.Context) {
 		key := c.Param("key")
 		d := c.GetHeader("duration")
+		fmt.Println("duration is ", d)
 		var duration time.Duration
 		if d == "" {
 			duration = 0
@@ -69,6 +73,13 @@ func StartHttpServer(svr *server.Server) {
 	g.Any("/debug/pprof/profile", gin.WrapF(pprof.Profile))
 	g.Any("/debug/pprof/symbol", gin.WrapF(pprof.Symbol))
 	g.Any("/debug/pprof/trace", gin.WrapF(pprof.Trace))
+
+	g.Any("/debug/pprof/heap", gin.WrapH(pprof.Handler("heap")))
+	g.Any("/debug/pprof/block", gin.WrapH(pprof.Handler("block")))
+	g.Any("/debug/pprof/goroutine", gin.WrapH(pprof.Handler("goroutine")))
+	g.Any("/debug/pprof/threadcreate", gin.WrapH(pprof.Handler("threadcreate")))
+
+
 
 
 

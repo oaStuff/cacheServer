@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"github.com/oaStuff/cacheServer/web"
 	_"net/http/pprof"
+	"time"
 )
 
 
@@ -24,6 +25,7 @@ func main() {
 										AllowConsoleLog:true, Filename:svrConfig.LogFile})
 
 	logger.Info("cacheServer starting ...")
+	logger.SetCallStackSkip(2)
 	svr := server.New(svrConfig, logger)
 	svr.Start()
 	logger.Info("cacheServer started")
@@ -38,7 +40,7 @@ func main() {
 	signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
 	<-c
 	logger.Info("cacheServer stopped")
-
+	time.Sleep(time.Millisecond * 250)
 }
 
 func parseProgramArgument() *server.Config {

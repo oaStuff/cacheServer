@@ -2,10 +2,10 @@
     "name" : "server_id_1",
     "join" : "",
     "port" : 9910,
-    "reconnect_on_disconnect" : true,
+    "reconnect_on_disconnect" : false,
     "log" : false,
     "logfile" : "./logs/app.log",
     "web" : true,
     "webport" : 8080,
-    "webdebug" : true
+    "webdebug" : false
 }
